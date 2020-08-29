@@ -22,7 +22,7 @@ pipeline {
 					submoduleCfg: [], 
 					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/heatstack']]
 					])
-				echo ${params.region}
+				echo ${params.branch}
 			}
 		}
 	}
