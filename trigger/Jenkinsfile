@@ -2,15 +2,21 @@ pipeline {
 	agent {
 		label 'master'
 	}
+	parameters {
+    	string defaultValue: 'v2.9.5_FR', 
+    	description: 'branch name of the repository', 
+    	name: 'branch', 
+    	trim: false
+    }
 
 	stages {
 		stage('clone_pipeline-test') {
 			steps {
 				checkout([
 					$class: 'GitSCM', 
-					branches: [[name: '*/master']],
+					branches: [[name: '*/$branch']],
 					doGenerateSubmoduleConfigurations: false,
-					extensions: [[$class: 'LocalBranch', localBranch: 'master'], 
+					extensions: [[$class: 'LocalBranch', localBranch: '$branch'], 
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'heatstack']],
 					submoduleCfg: [], 
