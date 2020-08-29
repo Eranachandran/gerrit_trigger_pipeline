@@ -14,9 +14,9 @@ pipeline {
 			steps {
 				checkout([
 					$class: 'GitSCM', 
-					branches: [[name: '*/${params.branch}']],
+					branches: [[name: '*/params.branch']],
 					doGenerateSubmoduleConfigurations: false,
-					extensions: [[$class: 'LocalBranch', localBranch: '${params.branch}'], 
+					extensions: [[$class: 'LocalBranch', localBranch: 'params.branch'], 
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'heatstack']],
 					submoduleCfg: [], 
