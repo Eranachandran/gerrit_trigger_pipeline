@@ -1,6 +1,6 @@
 pipeline {
 	agent {
-		label 'Integration-Server'
+		label 'master'
 	}
 	parameters {
     	string defaultValue: 'v2.9.5_FR', 
