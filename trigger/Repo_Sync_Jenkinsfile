@@ -1,6 +1,6 @@
 pipeline {
 	agent {
-		label 'master'
+		label 'Integration-Server'
 	}
 	parameters {
     	string defaultValue: 'v2.9.5_FR', 
@@ -8,9 +8,9 @@ pipeline {
     	name: 'branch', 
     	trim: false
 
-    	string defaultValue: 'gerrit_credentialsId', 
-    	description: 'branch name of the repository', 
-    	name: 'branch', 
+    	string defaultValue: '2e5f717b-82f6-4526-a358-42e77b16c6d5', 
+    	description: 'gerrit_credentialsId', 
+    	name: 'gerrit_credentialsId', 
     	trim: false
     }
 
