@@ -1,0 +1,63 @@
+pipeline {
+	agent {
+		label 'master'
+	}
+	parameters {
+    	string defaultValue: 'v2.9.5_FR', 
+    	description: 'branch name of the repository', 
+    	name: 'branch', 
+    	trim: false
+
+    	string defaultValue: '2e5f717b-82f6-4526-a358-42e77b16c6d5', 
+    	description: 'credentialsId for the corestack user in gerrit', 
+    	name: 'gerrit_credentialsId', 
+    	trim: false
+    }
+
+	stages {
+		stage('clone_repositories') {
+			steps {
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'broker']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/broker']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'compliance']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/compliance']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'congrss']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/congress']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'core-resources']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/core-resources']]
+					])
+			}
+		}
+	}
+}
