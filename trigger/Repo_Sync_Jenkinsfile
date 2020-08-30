@@ -7,6 +7,11 @@ pipeline {
     	description: 'branch name of the repository', 
     	name: 'branch', 
     	trim: false
+
+    	string defaultValue: 'gerrit_credentialsId', 
+    	description: 'branch name of the repository', 
+    	name: 'branch', 
+    	trim: false
     }
 
 	stages {
@@ -20,7 +25,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'broker']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/broker']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/broker']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -30,7 +35,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'compliance']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/compliance']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/compliance']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -40,7 +45,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'congrss']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/congress']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/congress']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -50,7 +55,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'core-resources']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/core-resources']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/core-resources']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -60,7 +65,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'corestack_identity']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/corestack_identity']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/corestack_identity']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -70,7 +75,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'core-ui']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/core-ui']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/core-ui']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -80,7 +85,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'governance']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/governance']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/governance']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -90,7 +95,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'heat']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/heat']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/heat']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -100,7 +105,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'heatstack']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/heatstack']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/heatstack']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -110,7 +115,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'keystone']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/keystone']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/keystone']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -120,7 +125,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'mistral']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/mistral']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/mistral']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -130,7 +135,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'notification']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/notification']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/notification']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -140,7 +145,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'resource_inventory']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/resource_inventory']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/resource_inventory']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -150,7 +155,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'servicenow_broker']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/servicenow_broker']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/servicenow_broker']]
 					])
 				checkout([
 					$class: 'GitSCM', 
@@ -160,7 +165,7 @@ pipeline {
 					[$class: 'CleanBeforeCheckout'], 
 					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'subscription']],
 					submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: '2e5f717b-82f6-4526-a358-42e77b16c6d5',url: 'https://review.corestack.in/subscription']]
+					userRemoteConfigs: [[credentialsId: '${gerrit_credentialsId}',url: 'https://review.corestack.in/subscription']]
 					])
 			}
 		}
