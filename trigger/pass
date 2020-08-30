@@ -1,0 +1,62 @@
+pipeline {
+	agent {
+		label 'master'
+	}
+	parameters {
+    	 choice choices: [''], description: '', name: 'gerrit_credentialsId'
+
+    	string defaultValue: 'v2.9.5_FR', 
+    	description: 'branch name of the repository', 
+    	name: 'branch', 
+    	trim: false
+    }
+
+	stages {
+		stage('clone_repositories') {
+			steps {
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'broker']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[url: 'https://review.corestack.in/broker']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'compliance']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[url: 'https://review.corestack.in/compliance']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'congrss']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[url: 'https://review.corestack.in/congress']]
+					])
+				checkout([
+					$class: 'GitSCM', 
+					branches: [[name: '*/${branch}']],
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [[$class: 'LocalBranch', localBranch: '${branch}'], 
+					[$class: 'CleanBeforeCheckout'], 
+					[$class: 'RelativeTargetDirectory', relativeTargetDir: 'core-resources']],
+					submoduleCfg: [], 
+					userRemoteConfigs: [[url: 'https://review.corestack.in/core-resources']]
+					])
+				checkout([
+				    $class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://bitbucket.org/corestack/resource_inventory.git']]])
+			}
+		}
+	}
+}
